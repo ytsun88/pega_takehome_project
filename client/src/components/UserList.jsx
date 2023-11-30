@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { CSVLink, CSVDownload } from "react-csv";
 import userService from "../services/user.service";
 
 import "./style.css";
@@ -20,6 +21,12 @@ const UserList = () => {
         console.log(err);
       });
   }, []);
+
+  const headers = [
+    { label: "id", key: "_id" },
+    { label: "username", key: "username" },
+    { label: "age", key: "age" },
+  ];
 
   return (
     <div className="container">
@@ -48,10 +55,14 @@ const UserList = () => {
           </div>
         ))}
       </div>
-
-      <button className="addUser" onClick={openAddModal}>
-        Add
-      </button>
+      <div className="buttonContainer">
+        <button className="addUser" onClick={openAddModal}>
+          Add
+        </button>
+        <CSVLink data={userList} headers={headers} filename={"my-file.csv"}>
+          <button className="exportButton">Export</button>
+        </CSVLink>
+      </div>
       <AddUserModal />
       <EditUserModal />
     </div>
