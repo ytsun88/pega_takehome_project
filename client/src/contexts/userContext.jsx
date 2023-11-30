@@ -1,19 +1,22 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
+import userService from "../services/user.service";
 
-export const userContext = createContext();
+export const UserContext = createContext();
 
-export const userContextProvider = (props) => {
+export const UserContextProvider = (props) => {
   const [userList, setUserList] = useState([]);
   const [username, setUsername] = useState("");
   const [age, setAge] = useState(-1);
   const [editedUser, setEditedUser] = useState({});
   const [addModalIsOpen, setAddModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   function openAddModal() {
     setAddModalIsOpen(true);
   }
 
   function closeAddModal() {
+    setErrorMessage("");
     setAddModalIsOpen(false);
   }
 
@@ -25,6 +28,7 @@ export const userContextProvider = (props) => {
   }
 
   function closeEditModal() {
+    setErrorMessage("");
     setEditModalIsOpen(false);
   }
   const handleAdd = () => {
@@ -43,7 +47,11 @@ export const userContextProvider = (props) => {
         setAddModalIsOpen(false);
       })
       .catch((err) => {
-        alert(err.response.data);
+        if (err.response) {
+          setErrorMessage(err.response.data);
+        } else {
+          setErrorMessage(err);
+        }
       });
   };
 
@@ -56,7 +64,7 @@ export const userContextProvider = (props) => {
       return alert(error.response.data);
     }
     const newUserList = userList.filter((user) => {
-      return user._id != id;
+      return user._id !== id;
     });
     setUserList(newUserList);
   };
@@ -76,10 +84,29 @@ export const userContextProvider = (props) => {
       setAge(-1);
       alert(result.data);
       closeEditModal();
-    } catch (error) {
-      console.log(error);
-      return alert(error.response.data);
+    } catch (err) {
+      if (err.response) {
+        setErrorMessage(err.response.data);
+      } else {
+        setErrorMessage(err);
+      }
     }
+  };
+
+  const customStyles = {
+    content: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "start",
+      width: "30%",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      borderRadius: "0.5rem",
+    },
   };
 
   const contextValue = {
@@ -102,11 +129,14 @@ export const userContextProvider = (props) => {
     handleAdd,
     handleDelete,
     handleEdit,
+    errorMessage,
+    setErrorMessage,
+    customStyles,
   };
 
   return (
-    <userContext.Provider value={contextValue}>
+    <UserContext.Provider value={contextValue}>
       {props.children}
-    </userContext.Provider>
+    </UserContext.Provider>
   );
 };

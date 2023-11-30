@@ -44,17 +44,14 @@ router.put("/edit/:_id", async (req, res) => {
     return res.status(400).send(error.details[0].message);
   }
   const { _id } = req.params;
-  const { newUsername, newAge } = req.body;
+  const { username, age } = req.body;
   const foundUser = await Users.findById({ _id });
   if (!foundUser) {
     res.status(404).send("User not found");
   }
-  Users.findOneAndUpdate(
-    { _id },
-    { $set: { username: newUsername, age: newAge } }
-  )
+  Users.findOneAndUpdate({ _id }, { $set: { username, age } })
     .then(() => {
-      res.send("Suceeded");
+      res.send("Succeeded");
     })
     .catch((err) => {
       console.log(err);

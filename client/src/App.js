@@ -1,12 +1,12 @@
-import AddUser from "./components/AddUser";
-import { userContextProvider } from "./contexts/userContext";
+import UserList from "./components/UserList";
+import { UserContextProvider } from "./contexts/userContext";
 
 function App() {
   return (
     <div className="App">
-      <userContextProvider>
-        <AddUser />
-      </userContextProvider>
+      <UserContextProvider>
+        <UserList />
+      </UserContextProvider>
     </div>
   );
 }

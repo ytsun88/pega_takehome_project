@@ -2,29 +2,31 @@ import React, { useContext } from "react";
 import Modal from "react-modal";
 import { UserContext } from "../contexts/userContext";
 
-const AddUserModal = () => {
+const EditUserModal = () => {
   Modal.setAppElement(document.getElementById("root"));
   const {
-    addModalIsOpen,
-    closeAddModal,
-    handleAdd,
+    editModalIsOpen,
+    closeEditModal,
+    editedUser,
     setAge,
     setUsername,
+    handleEdit,
     errorMessage,
     customStyles,
   } = useContext(UserContext);
+
   return (
     <div>
       <Modal
-        isOpen={addModalIsOpen}
-        onRequestClose={closeAddModal}
+        isOpen={editModalIsOpen}
+        onRequestClose={closeEditModal}
         style={customStyles}
-        id="addUserModal"
+        id="editUserModal"
       >
-        <button className="closeButton" onClick={closeAddModal}>
+        <button className="closeButton" onClick={closeEditModal}>
           ✖
         </button>
-        <h3 className="modalHeader">Create a new user</h3>
+        <h3 className="modalHeader">Edit the user</h3>
         {errorMessage !== "" && (
           <div className="errorMessage">{errorMessage}</div>
         )}
@@ -34,6 +36,7 @@ const AddUserModal = () => {
           id="username"
           name="username"
           autoComplete="off"
+          defaultValue={editedUser.username}
           onChange={(e) => {
             setUsername(e.target.value);
           }}
@@ -44,16 +47,17 @@ const AddUserModal = () => {
           id="age"
           name="age"
           autoComplete="off"
+          defaultValue={editedUser.age}
           onChange={(e) => {
             setAge(e.target.value);
           }}
         />
-        <button className="addButton" onClick={handleAdd}>
-          Add User
+        <button className="editUser" onClick={() => handleEdit(editedUser._id)}>
+          Edit User
         </button>
       </Modal>
     </div>
   );
 };
 
-export default AddUserModal;
+export default EditUserModal;

@@ -114,3 +114,8 @@ input {
   margin-bottom: 0.5rem;
   align-self: center;
 }
+
+div.errorMessage {
+  color: red;
+  align-self: center;
+}
