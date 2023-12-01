@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
     min: 0,
     max: 120,
   },
+  thumbnail: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

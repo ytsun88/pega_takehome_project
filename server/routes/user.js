@@ -2,12 +2,9 @@ const router = require("express").Router();
 const Users = require("../models").userModel;
 const userValidator = require("../validator").userValidator;
 
-router.get("/test", (req, res) => {
-  res.json({ Message: "Success" });
-});
-
+// get all existing users
 router.get("/", (req, res) => {
-  Users.find({}, "_id username age")
+  Users.find({}, "_id username age thumbnail")
     .exec()
     .then((data) => {
       res.json(data);
@@ -17,16 +14,18 @@ router.get("/", (req, res) => {
     });
 });
 
+// add a new user
 router.post("/add", (req, res) => {
-  const { error } = userValidator(req.body);
+  const { username, age, thumbnail } = req.body;
+  const { error } = userValidator({ username: username, age: age });
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
 
-  const { username, age } = req.body;
   const newUser = new Users({
     username: username,
     age: age,
+    thumbnail: thumbnail,
   });
   newUser
     .save()
@@ -38,18 +37,20 @@ router.post("/add", (req, res) => {
     });
 });
 
+// update a user's information
 router.put("/edit/:_id", async (req, res) => {
-  const { error } = userValidator(req.body);
+  const { username, age, thumbnail } = req.body;
+  const { error } = userValidator({ username: username, age: age });
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
   const { _id } = req.params;
-  const { username, age } = req.body;
+
   const foundUser = await Users.findById({ _id });
   if (!foundUser) {
     res.status(404).send("User not found");
   }
-  Users.findOneAndUpdate({ _id }, { $set: { username, age } })
+  Users.findOneAndUpdate({ _id }, { $set: { username, age, thumbnail } })
     .then(() => {
       res.send("Succeeded");
     })
@@ -59,6 +60,7 @@ router.put("/edit/:_id", async (req, res) => {
     });
 });
 
+// delete a user
 router.delete("/delete/:_id", async (req, res) => {
   const { _id } = req.params;
   const foundUser = await Users.findById({ _id });

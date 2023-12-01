@@ -16,7 +16,7 @@ h1.header {
 }
 
 div.listContainer {
-  width: 50vw;
+  width: 70vw;
   height: 70vh;
   background-color: white;
   border-radius: 0.5rem;
@@ -138,4 +138,56 @@ div.buttonContainer {
 .exportButton:hover {
   background-color: rgb(0, 17, 255);
   cursor: pointer;
+}
+
+div.imageContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+div.uploadContainer {
+  display: flex;
+}
+
+.uploadButton {
+  margin: 0rem 0.5rem;
+  padding: 0.5rem;
+  color: white;
+  background-color: rgb(0, 81, 255);
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.uploadButton:hover {
+  background-color: rgb(0, 17, 255);
+  cursor: pointer;
+}
+
+.imageUpload {
+  display: none;
+}
+
+.image {
+  max-width: 20%;
+}
+
+.deleteImage {
+  font-size: larger;
+  border: none;
+  background: none;
+}
+
+.deleteImage:hover {
+  font-weight: bolder;
+}
+
+div.userImage {
+  width: 10%;
+}
+
+div.userImage img {
+  width: 100%;
 }

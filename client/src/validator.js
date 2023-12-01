@@ -1,5 +1,6 @@
 import Joi from "joi";
 
+// costraints of username and age
 const userValidator = (data) => {
   const schema = Joi.object({
     username: Joi.string().required(),

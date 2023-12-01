@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
 import { UserContext } from "../contexts/userContext";
+import ImageUploader from "./ImageUploader";
 
 const AddUserModal = () => {
   Modal.setAppElement(document.getElementById("root"));
@@ -48,6 +49,7 @@ const AddUserModal = () => {
             setAge(e.target.value);
           }}
         />
+        <ImageUploader />
         <button className="addButton" onClick={handleAdd}>
           Add User
         </button>

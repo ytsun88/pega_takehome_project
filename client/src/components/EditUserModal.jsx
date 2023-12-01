@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
 import { UserContext } from "../contexts/userContext";
+import ImageUploader from "./ImageUploader";
 
 const EditUserModal = () => {
   Modal.setAppElement(document.getElementById("root"));
@@ -52,6 +53,7 @@ const EditUserModal = () => {
             setAge(e.target.value);
           }}
         />
+        <ImageUploader />
         <button className="editUser" onClick={() => handleEdit(editedUser._id)}>
           Edit User
         </button>
