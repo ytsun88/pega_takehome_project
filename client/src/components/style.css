@@ -36,22 +36,32 @@ div.userList {
   margin: 0.5rem 0rem;
   padding: 0.5rem 1rem;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+}
+
+.userImage {
+  flex: 1 1 10%;
+  max-height: 30%;
 }
 
 .userData {
   flex: 8 1 60%;
   padding: 0.5rem 1rem;
+  align-self: center;
+  font-size: 1.5rem;
 }
 
 .DEbuttons {
-  align-self: flex-end;
-  flex: 1 1 40%;
+  align-self: center;
+  flex: 1 1 30%;
+  display: flex;
+  justify-content: end;
 }
 
 .editButton,
 .deleteButton {
   font-weight: bold;
+  font-size: 1rem;
   margin: 0rem 0.5rem;
   padding: 0.5rem;
   color: white;

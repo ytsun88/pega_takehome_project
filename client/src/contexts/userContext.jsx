@@ -90,6 +90,7 @@ export const UserContextProvider = (props) => {
       setInProcess(true);
       if (fileSize > 1) {
         setErrorMessage("File size should be less than 1MB");
+        setInProcess(false);
         return;
       }
       userService
@@ -158,6 +159,7 @@ export const UserContextProvider = (props) => {
       setInProcess(true);
       if (fileSize > 1) {
         setErrorMessage("File size should be less than 1MB");
+        setInProcess(false);
         return;
       }
       try {
