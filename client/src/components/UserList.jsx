@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 import userService from "../services/user.service";
 
 import "./style.css";
@@ -20,7 +20,7 @@ const UserList = () => {
       .catch((err) => {
         alert(err.message);
       });
-  }, []);
+  }, [setUserList]);
 
   const headers = [
     { label: "id", key: "_id" },
@@ -39,13 +39,9 @@ const UserList = () => {
             <div className="userList" key={user._id}>
               <div className="userImage">
                 {user.thumbnail && (
-                  <img
-                    src={user.thumbnail}
-                    alt="user image"
-                    title={user.username}
-                  />
+                  <img src={user.thumbnail} alt="user" title={user.username} />
                 )}
-                {!user.thumbnail && <img src={avatarImage} />}
+                {!user.thumbnail && <img src={avatarImage} alt="user" />}
               </div>
               <div className="userData">
                 {user.username} ({user.age} years old)

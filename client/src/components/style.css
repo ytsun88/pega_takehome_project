@@ -55,7 +55,7 @@ div.userList {
   align-self: center;
   flex: 1 1 30%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .editButton,

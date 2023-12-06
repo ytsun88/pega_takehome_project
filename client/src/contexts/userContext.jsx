@@ -18,7 +18,7 @@ export const UserContextProvider = (props) => {
   // state of whether modal opening
   const [addModalIsOpen, setAddModalIsOpen] = useState(false);
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
-  // state to check if there is something being processed
+  // state to check if there is something in process
   const [inProcess, setInProcess] = useState(false);
 
   // Change image file to data URL and set state
