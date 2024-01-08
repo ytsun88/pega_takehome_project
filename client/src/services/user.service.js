@@ -1,7 +1,7 @@
 import axios from "axios";
 import userValidator from "../validator";
 
-const API_URL = "http://localhost:3001/user";
+const API_URL = "http://localhost:8000/user";
 
 class UserService {
   // get all users
